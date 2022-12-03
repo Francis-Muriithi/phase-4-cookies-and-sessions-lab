@@ -7,8 +7,7 @@ class ArticlesController < ApplicationController
 
   def show
     article = Article.find(params[:id])
-    #set `session[:page_views]` to
-  an initial value of 0.
+    #set `session[:page_views]` to an initial value of 0.
     session[:page_views] ||= 0
 
     #For every request to `/articles/:id`, increment the value of `session[:page_views]` by 1.
@@ -20,7 +19,7 @@ class ArticlesController < ApplicationController
         render json: article
       else
         #If the user has viewed more than 3 pages, render a JSON response including an error message, and a status code of 401 unauthorized.
-        render json: { error: "You have reached the maximum number of views" }, status: :unauthorized
+        render json: { error: "Maximum pageview limit reached" }, status: :unauthorized
       end
   end
 
